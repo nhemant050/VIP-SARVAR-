@@ -1,0 +1,296 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <title>TRADER MODS WEB </title>  
+  <style>  
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');  
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');  * {  
+  box-sizing: border-box;  
+  margin: 0;  
+  padding: 0;  
+}  
+
+body {  
+  font-family: 'Poppins', sans-serif;  
+  background: radial-gradient(circle at top, #0f172a, #1e3a8a);  
+  color: white;  
+  text-align: center;  
+  padding: 20px;  
+  min-height: 100vh;  
+  overflow-x: hidden;  
+}  
+
+.login-container {  
+  max-width: 400px;  
+  margin: 100px auto;  
+  background: rgba(30, 41, 59, 0.9);  
+  padding: 30px;  
+  border-radius: 12px;  
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);  
+  animation: fadeIn 1s ease;  
+}  
+
+.login-container h1 {  
+  font-family: 'Orbitron', sans-serif;  
+  font-size: 24px;  
+  margin-bottom: 20px;  
+  color: #facc15;  
+}  
+
+.login-container input {  
+  width: 100%;  
+  padding: 12px;  
+  margin-bottom: 15px;  
+  border: none;  
+  border-radius: 8px;  
+  font-size: 16px;  
+}  
+
+.login-container button {  
+  background: #facc15;  
+  color: #0f172a;  
+  border: none;  
+  padding: 10px 20px;  
+  font-weight: bold;  
+  border-radius: 8px;  
+  cursor: pointer;  
+  font-size: 16px;  
+  transition: background 0.3s ease;  
+}  
+
+.login-container button:hover {  
+  background: #fde047;  
+}  
+
+.telegram-link {  
+  margin-top: 15px;  
+  display: block;  
+  color: #60a5fa;  
+  text-decoration: none;  
+  font-weight: bold;  
+}  
+
+.telegram-link:hover {  
+  text-decoration: underline;  
+}  
+
+#mainApp {  
+  display: none;  
+  animation: fadeIn 1s ease-in-out;  
+}  
+
+@keyframes fadeIn {  
+  from { opacity: 0; transform: scale(0.95); }  
+  to { opacity: 1; transform: scale(1); }  
+}  
+
+.container {  
+  max-width: 420px;  
+  margin: auto;  
+  animation: fadeIn 1s ease;  
+}  
+
+.logo {  
+  font-size: 24px;  
+  font-weight: bold;  
+  background: #020617;  
+  padding: 10px;  
+  border-radius: 10px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  gap: 10px;  
+  letter-spacing: 1px;  
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);  
+}  
+
+.logo span {  
+  color: #facc15;  
+}  
+
+.settings-icon {  
+  cursor: pointer;  
+  transition: transform 0.3s ease;  
+}  
+
+.settings-icon:hover {  
+  transform: rotate(30deg);  
+}  
+
+.box, .history-box, .streak-box {  
+  background: rgba(30, 41, 59, 0.85);  
+  padding: 15px;  
+  border-radius: 12px;  
+  margin: 15px 0;  
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);  
+  text-align: left;  
+  transition: transform 0.3s ease;  
+}  
+
+.box:hover, .history-box:hover, .streak-box:hover {  
+  transform: scale(1.02);  
+}  
+
+.title {  
+  font-size: 16px;  
+  font-weight: bold;  
+  margin-bottom: 10px;  
+  color: #facc15;  
+  border-left: 4px solid #facc15;  
+  padding-left: 10px;  
+}  
+
+.history-entry {  
+  background: #334155;  
+  padding: 10px;  
+  border-radius: 8px;  
+  margin-bottom: 8px;  
+  animation: fadeInEntry 0.6s ease;  
+}  
+
+@keyframes fadeInEntry {  
+  from { opacity: 0; transform: translateY(10px); }  
+  to { opacity: 1; transform: translateY(0); }  
+}  
+
+.streak-item {  
+  display: inline-block;  
+  width: 30%;  
+  text-align: center;  
+}  
+
+.win { color: #10b981; }  
+.loss { color: #ef4444; }  
+.accuracy { color: #facc15; }  
+.pending { color: #fbbf24; }
+
+  </style>  
+</head>  
+<body>    <div id="loginPage" class="login-container">  
+    <h1>Login to TRADER MODS</h1>  
+    <input type="password" id="passwordInput" placeholder="Enter Password" />  
+    <button onclick="checkPassword()">Enter</button>  
+    <p id="errorMessage" style="color:red; margin-top:10px;"></p>  
+    <a class="telegram-link" href="https://t.me/+BZULc3gHaX9jNzk1" target="_blank">Join our Telegram Channel</a>  
+  </div>    <div id="mainApp">  
+    <div class="container">  
+      <div class="logo">  
+        📈 TRADER MODS WEB  <span>S3</span>  
+        <span class="settings-icon" onclick="openSettings()">⚙️</span>  
+      </div>  <div class="box">  
+    <div class="title">🟡 Current Prediction</div>  
+    <p>🎮 <strong>Game Type:</strong> Wingo 1 Min</p>  
+    <p>⏳ <strong>Period:</strong> <span id="currentPeriod">Loading...</span></p>  
+    <p>⭐ <strong>Prediction:</strong> <span id="prediction">Loading...</span> <span class="pending">🟡 Pending</span></p>  
+  </div>  
+
+  <div class="history-box">  
+    <div class="title">🔄 Prediction History</div>  
+    <div id="history"></div>  
+  </div>  
+
+  <div class="streak-box">  
+    <div class="title">📊 Streaks and Accuracy</div>  
+    <div class="streak-item">  
+      🟢 Win Streak <br>  
+      <span id="winStreak" class="win">0</span>  
+    </div>  
+    <div class="streak-item">  
+      🔴 Loss Streak <br>  
+      <span id="lossStreak" class="loss">0</span>  
+    </div>  
+    <div class="streak-item">  
+      🎯 Accuracy <br>  
+      <span id="accuracy" class="accuracy">0.00%</span>  
+    </div>  
+  </div>  
+
+  <a class="telegram-link" href="https://t.me/+BZULc3gHaX9jNzk1" target="_blank">Telegram Group</a>  
+</div>
+
+  </div>    <script>  
+    function checkPassword() {  
+      const input = document.getElementById("passwordInput").value;  
+      if (input === "1472580") {  
+        document.getElementById("loginPage").style.display = "none";  
+        document.getElementById("mainApp").style.display = "block";  
+      } else {  
+        document.getElementById("errorMessage").innerText = "Incorrect password!";  
+      }  
+    }  
+  
+    function openSettings() {  
+      alert("Settings will be implemented soon!");  
+    }  
+  
+    function generatePeriodNumber() {  
+      let now = new Date();  
+      let year = now.getUTCFullYear();  
+      let month = String(now.getUTCMonth() + 1).padStart(2, '0');  
+      let day = String(now.getUTCDate()).padStart(2, '0');  
+      let hours = now.getUTCHours();  
+      let minutes = now.getUTCMinutes();  
+      let totalMinutes = hours * 60 + minutes;  
+      return `${year}${month}${day}1000${10001 + totalMinutes}`;  
+    }  
+  
+    let history = [];  
+    let winStreak = 0;  
+    let lossStreak = 0;  
+    let totalPredictions = 0;  
+    let correctPredictions = 0;  
+  
+    async function fetchGameResult() {  
+      let result = Math.floor(Math.random() * 10);  
+      let period = generatePeriodNumber();  
+      return { period, result };  
+    }  
+  
+    async function updatePrediction() {  
+      let periodNumber = generatePeriodNumber();  
+      let apiResult = await fetchGameResult();  
+  
+      if (apiResult) {  
+        let predictionType = apiResult.result >= 5 ? "SMALL" : "BIG";  
+        document.getElementById("currentPeriod").innerText = periodNumber;  
+        document.getElementById("prediction").innerText = predictionType;  
+  
+        let isWin = predictionType === (apiResult.result >= 5 ? "SMALL" : "BIG");  
+        history.unshift({  
+          period: apiResult.period,  
+          prediction: predictionType,  
+          status: isWin ? "✅ WIN" : "❌ LOSS"  
+        });  
+  
+        if (isWin) {  
+          winStreak++;  
+          lossStreak = 0;  
+          correctPredictions++;  
+        } else {  
+          lossStreak++;  
+          winStreak = 0;  
+        }  
+  
+        totalPredictions++;  
+        let accuracy = (correctPredictions / totalPredictions) * 100;  
+  
+        document.getElementById("winStreak").innerText = winStreak;  
+        document.getElementById("lossStreak").innerText = lossStreak;  
+        document.getElementById("accuracy").innerText = accuracy.toFixed(2) + "%";  
+  
+        let historyDiv = document.getElementById("history");  
+        historyDiv.innerHTML = history.slice(0, 5).map(h => `  
+          <div class="history-entry">  
+            ⏳ <strong>Period:</strong> ${h.period} <br>  
+            ⭐ <strong>Prediction:</strong> ${h.prediction} <br>  
+            ${h.status}  
+          </div>  
+        `).join("");  
+      }  
+    }  
+  
+    updatePrediction();  
+    setInterval(updatePrediction, 60000);  
+  </script>  </body>  
+</html>
